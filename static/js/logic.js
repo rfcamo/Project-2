@@ -125,7 +125,8 @@ d3.json("static/data/australian-suburbs.geojson").then(function(geoData) {
                 },
                 // Add a pop-op
                 onEachFeature: function(feature, layer) {
-                    layer.bindPopup("<strong>Suburb: </strong>" + feature.properties.Suburb.charAt(0).toUpperCase());
+                    layer.bindPopup("<strong>Suburb: </strong>" + feature.properties.Suburb.charAt(0).toUpperCase() + feature.properties.Suburb.substring(1) + "<br>" +
+                                    "<strong>Postcode: </strong>" + feature.properties.postcode);
                   }
             
               }).addTo(myMap)
