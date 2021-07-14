@@ -40,7 +40,6 @@ def home():
 
     # Return template and data
     return render_template("index.html")
-    
 
 
 @app.route("/api/v1.0/install")
@@ -50,7 +49,8 @@ def installs():
 
     """Return a list of install data"""
     # Query all outputs
-    results = session.query(Install.postcode, Install._2001, Install._2002, Install._2003, Install._2004, Install._2005, Install._2006, Install._2007, Install._2008, Install._2009, Install._2010, Install._2011, Install._2012, Install._2013, Install._2014, Install._2015, Install._2016, Install._2017, Install._2018, Install._2019, Install._2020, Install._2021, Install.AVG, Install.Total).all()
+    results = session.query(Install.postcode, Install._2001, Install._2002, Install._2003, Install._2004, Install._2005, Install._2006, Install._2007, Install._2008, Install._2009, Install._2010,
+                            Install._2011, Install._2012, Install._2013, Install._2014, Install._2015, Install._2016, Install._2017, Install._2018, Install._2019, Install._2020, Install._2021, Install.AVG, Install.Total).all()
 
     session.close()
 
@@ -88,8 +88,6 @@ def installs():
     return jsonify(all_installs)
 
 
-
-
 @app.route("/api/v1.0/output")
 def outputs():
     # Create our session (link) from Python to the DB
@@ -97,7 +95,8 @@ def outputs():
 
     """Return a list of output data"""
     # Query all outputs
-    results = session.query(Output.postcode, Output._2001, Output._2002, Output._2003, Output._2004, Output._2005, Output._2006, Output._2007, Output._2008, Output._2009, Output._2010, Output._2011, Output._2012,Output._2013, Output._2014, Output._2015, Output._2016, Output._2017, Output._2018,Output._2019,Output._2020, Output._2021, Output.AVG, Output.Total).all()
+    results = session.query(Output.postcode, Output._2001, Output._2002, Output._2003, Output._2004, Output._2005, Output._2006, Output._2007, Output._2008, Output._2009, Output._2010,
+                            Output._2011, Output._2012, Output._2013, Output._2014, Output._2015, Output._2016, Output._2017, Output._2018, Output._2019, Output._2020, Output._2021, Output.AVG, Output.Total).all()
 
     session.close()
 
@@ -142,7 +141,8 @@ def incomes():
 
     """Return a list of income data"""
     # Query all outputs
-    results = session.query(Income.Postcode, Income.Average_total, Income.Average_salary).all()
+    results = session.query(
+        Income.Postcode, Income.Average_total, Income.Average_salary).all()
 
     session.close()
 
@@ -165,13 +165,14 @@ def rebates():
 
     """Return a list of rebate data """
     # Query all outputs
-    results = session.query(Rebate.postcode, Rebate.zone, Rebate.rating, Rebate.annual_prod, Rebate.rebate).all()
+    results = session.query(Rebate.postcode, Rebate.zone,
+                            Rebate.rating, Rebate.annual_prod, Rebate.rebate).all()
 
     session.close()
 
     # Create a dictionary from the row data and append to a list of all_passengers
     all_rebates = []
-    for postcode, zone, rating, annual_prod, rebate  in results:
+    for postcode, zone, rating, annual_prod, rebate in results:
         rebate_dict = {}
         rebate_dict["postcode"] = postcode
         rebate_dict["zone"] = zone
@@ -190,13 +191,14 @@ def suburbs():
 
     """Return a list of suburb data """
     # Query all outputs
-    results = session.query(Suburbs.postcode, Suburbs.installations, Suburbs.output, Suburbs.suburb_id, Suburbs.suburb, Suburbs.state, Suburbs.long, Suburbs.lat).all()
+    results = session.query(Suburbs.postcode, Suburbs.installations, Suburbs.output,
+                            Suburbs.suburb_id, Suburbs.suburb, Suburbs.state, Suburbs.long, Suburbs.lat).all()
 
     session.close()
 
     # Create a dictionary from the row data and append to a list of all_passengers
     all_suburbs = []
-    for postcode, suburb_id, suburb, state, long, lat  in results:
+    for postcode, suburb_id, suburb, state, long, lat, *_ in results:
         suburb_dict = {}
         suburb_dict["postcode"] = postcode
         suburb_dict["suburb_id"] = suburb_id
